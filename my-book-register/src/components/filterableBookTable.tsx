@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { BookItemModel } from "../models";
-import LabelInput from "./labelInput";
 import BookTable from "./bookTable";
 
 interface Props {
@@ -17,17 +16,18 @@ const FilterableBookTable = (props: Props) => {
 
     return (
         <div className="filterable-book-table">
-            <LabelInput
-                text="filter"
-                value={filterText}
-                onChange={handleChangeFilterText}
-            />
-            <BookTable
-                bookItems={props.books.filter(x =>
-                    !filterText || x.name.includes(filterText)
-                )}
-                setBooks={props.setBooks}
-            />
+          <div className="label-input">
+            <label className="label">
+                filter
+            </label>
+            <input className="input" placeholder="入力してください" value={filterText} onChange={handleChangeFilterText}></input>
+          </div>
+          <BookTable
+              bookItems={props.books.filter(x =>
+                  !filterText || x.name.includes(filterText)
+              )}
+              setBooks={props.setBooks}
+          />
         </div>
     );
 }
