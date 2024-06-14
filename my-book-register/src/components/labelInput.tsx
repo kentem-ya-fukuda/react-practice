@@ -8,7 +8,7 @@ interface Props {
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const LabelInput = ({ text, onChange, value }: Props) => {
+const LabelInput = ({ text, value, onChange }: Props) => {
   return (
     <div className="label-input">
       <Label>{text}</Label>

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useState } from 'react';
 import { BookItemModel } from '../models';
-import LabelInput from './labelInput';
 import BookTable from './bookTable';
+import LabelInput from './labelInput';
 
 interface Props {
   books: BookItemModel[];
@@ -16,9 +16,8 @@ const FilterableBookTable = ({
 }: Props) => {
   const [filterText, setFilterText] = useState('');
 
-  const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) =>
     setFilterText(e.target.value);
-  };
 
   return (
     <div className="filterable-book-table">
