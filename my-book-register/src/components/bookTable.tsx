@@ -20,7 +20,20 @@ const BookTable = ({ bookItems, setBooks }: Props) => {
                 </tr>
             </thead>
             {bookItems.map(book => (
-                <BookRow bookItem={book} setBooks={setBooks} key={book.id} />
+                <BookRow 
+                    bookItem={book}
+                    onClickDelete={id => {
+                        setBooks(prev => [...prev.filter(b => b.id !== id)]);
+                    }}
+                    onClickLendingSwitch={id => {
+                        setBooks(prev => (
+                            prev.map(x => {
+                                const isOnLoan = x.id === id ? !x.isOnLoan: x.isOnLoan;
+                                return {...x, isOnLoan: isOnLoan};
+                            })
+                        ));
+                    }} 
+                    key={book.id} />
             ))}
         </table>
     );
