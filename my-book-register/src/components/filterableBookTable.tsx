@@ -1,14 +1,15 @@
-import { ChangeEventHandler, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { BookItemModel } from "../models";
 import LabelInput from "./labelInput";
 import BookTable from "./bookTable";
 
 interface Props {
     books: BookItemModel[];
-    setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
+    onClickDelete: (id: string) => void
+    onClickLendingSwitch: (id: string) => void
 }
 
-const FilterableBookTable = ({ books, setBooks }: Props) => {
+const FilterableBookTable = ({ books, onClickDelete, onClickLendingSwitch }: Props) => {
     const [filterText, setFilterText] = useState("");
 
     const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -26,17 +27,8 @@ const FilterableBookTable = ({ books, setBooks }: Props) => {
                 bookItems={books.filter(x =>
                     !filterText || x.name.includes(filterText)
                 )}
-                onClickDelete={id => {
-                    setBooks(prev => [...prev.filter(b => b.id !== id)]);
-                }}
-                onClickLendingSwitch={id => {
-                    setBooks(prev => (
-                        prev.map(x => {
-                            const isOnLoan = x.id === id ? !x.isOnLoan: x.isOnLoan;
-                            return {...x, isOnLoan: isOnLoan};
-                        })
-                    ));
-                }}
+                onClickDelete={onClickDelete}
+                onClickLendingSwitch={onClickLendingSwitch}
             />
         </div>
     );
