@@ -9,13 +9,9 @@ import FilterableBookTable from './components/filterableBookTable';
 function App() {
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
-  const handleClickAfterRegist = (): void => {
-    alert("書籍リスト再取得");
-  }
-
   return (
     <div className='App'>
-      <BookRegister onClickAfterRegist={handleClickAfterRegist} setBooks={setBooks} />
+      <BookRegister setBooks={setBooks} />
       <hr />
       <FilterableBookTable books={books} setBooks={setBooks} />
     </div>

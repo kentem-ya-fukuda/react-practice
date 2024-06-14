@@ -4,7 +4,6 @@ import LabelInput from "./labelInput";
 import { BookItemModel } from "../models";
 
 interface Props {
-    onClickAfterRegist: () => void;
     setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
 }
 
