@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import Button from "./button";
 import LabelInput from "./labelInput";
 import { BookItemModel } from "../models";
 
 interface Props {
-    setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
+    onPostCompleted: (postedItem: Omit<BookItemModel, 'id'>) => void
 }
 
-const BookRegister = ({ setBooks }: Props) => {
+const BookRegister = ({ onPostCompleted }: Props) => {
     const [isbn, setIsbn] = useState('');
 
     const handleClickButton = (): void => {
@@ -18,11 +18,10 @@ const BookRegister = ({ setBooks }: Props) => {
                 alert('登録されていない ISBN コードです。');
                 return;
             }
-            setBooks(prev => [...prev, {
-                id: prev.length.toString(),
+            onPostCompleted({
                 name: data.items[0].volumeInfo.title,
                 isOnLoan: false,
-            }]);
+            })
         });
     }
 

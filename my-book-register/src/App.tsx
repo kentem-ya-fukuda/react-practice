@@ -11,7 +11,12 @@ function App() {
 
   return (
     <div className='App'>
-      <BookRegister setBooks={setBooks} />
+      <BookRegister onPostCompleted={postedItem => {
+        setBooks(prev => [...prev, {
+          id: prev.length.toString(),
+          ...postedItem
+        }])
+      }} />
       <hr />
       <FilterableBookTable books={books} setBooks={setBooks} />
     </div>
