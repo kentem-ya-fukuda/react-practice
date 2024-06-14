@@ -1,5 +1,5 @@
 export interface BookItemModel {
-    id: string;
-    name: string;
-    isOnLoan: boolean;
+  id: string;
+  name: string;
+  isOnLoan: boolean;
 }
