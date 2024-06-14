@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction, useState } from "react";
 import { BookItemModel } from "../models";
 import LabelInput from "./labelInput";
 import BookTable from "./bookTable";
@@ -11,7 +11,7 @@ interface Props {
 const FilterableBookTable = ({ books, setBooks }: Props) => {
     const [filterText, setFilterText] = useState("");
 
-    const handleChangeFilterText = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) => {
         setFilterText(e.target.value);
     }
 
