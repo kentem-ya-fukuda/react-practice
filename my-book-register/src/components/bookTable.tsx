@@ -1,15 +1,14 @@
-import { Dispatch, SetStateAction } from "react";
 import { BookItemModel } from "../models";
 import BookRow from "./bookRow";
 
 interface Props {
     //書籍情報一覧のstate
     bookItems: BookItemModel[];
-    //書籍情報一覧のstateを更新する関数
-    setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
+    onClickDelete: (id: string) => void
+    onClickLendingSwitch: (id: string) => void
 }
 
-const BookTable = ({ bookItems, setBooks }: Props) => {
+const BookTable = ({ bookItems, onClickDelete, onClickLendingSwitch }: Props) => {
     return (
         <table border={1}>
             <thead>
@@ -22,17 +21,8 @@ const BookTable = ({ bookItems, setBooks }: Props) => {
             {bookItems.map(book => (
                 <BookRow 
                     bookItem={book}
-                    onClickDelete={id => {
-                        setBooks(prev => [...prev.filter(b => b.id !== id)]);
-                    }}
-                    onClickLendingSwitch={id => {
-                        setBooks(prev => (
-                            prev.map(x => {
-                                const isOnLoan = x.id === id ? !x.isOnLoan: x.isOnLoan;
-                                return {...x, isOnLoan: isOnLoan};
-                            })
-                        ));
-                    }} 
+                    onClickDelete={onClickDelete}
+                    onClickLendingSwitch={onClickLendingSwitch} 
                     key={book.id} />
             ))}
         </table>

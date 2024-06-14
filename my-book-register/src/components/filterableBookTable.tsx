@@ -26,7 +26,17 @@ const FilterableBookTable = ({ books, setBooks }: Props) => {
                 bookItems={books.filter(x =>
                     !filterText || x.name.includes(filterText)
                 )}
-                setBooks={setBooks}
+                onClickDelete={id => {
+                    setBooks(prev => [...prev.filter(b => b.id !== id)]);
+                }}
+                onClickLendingSwitch={id => {
+                    setBooks(prev => (
+                        prev.map(x => {
+                            const isOnLoan = x.id === id ? !x.isOnLoan: x.isOnLoan;
+                            return {...x, isOnLoan: isOnLoan};
+                        })
+                    ));
+                }}
             />
         </div>
     );
