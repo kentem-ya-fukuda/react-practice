@@ -7,9 +7,9 @@ interface Props {
     setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
 }
 
-const BookRow = (props: Props) => {
+const BookRow = ({ bookItem, setBooks }: Props) => {
     const handleClickLendingSwitch = (id: string): void => {
-        props.setBooks(prev => (
+        setBooks(prev => (
             prev.map(x => {
                 const isOnLoan = x.id === id ? !x.isOnLoan: x.isOnLoan;
                 return {...x, isOnLoan: isOnLoan};
@@ -18,26 +18,26 @@ const BookRow = (props: Props) => {
     }
 
     const handleClickDelete = (id: string): void => {
-        props.setBooks(prev => [...prev.filter(b => b.id !== id)]);
+        setBooks(prev => [...prev.filter(b => b.id !== id)]);
     }
 
     return (
         <tr>
-            <td>{props.bookItem.name}</td>
-            <td>{props.bookItem.isOnLoan ? "貸出中" : "利用可能"}</td>
+            <td>{bookItem.name}</td>
+            <td>{bookItem.isOnLoan ? "貸出中" : "利用可能"}</td>
             <td>
-                <Button onClick={() => handleClickDelete(props.bookItem.id)}>
+                <Button onClick={() => handleClickDelete(bookItem.id)}>
                     削除
                 </Button>
                 <Button
-                    disabled={props.bookItem.isOnLoan}
-                    onClick={() => handleClickLendingSwitch(props.bookItem.id)}
+                    disabled={bookItem.isOnLoan}
+                    onClick={() => handleClickLendingSwitch(bookItem.id)}
                 >
                     貸出
                 </Button>
                 <Button
-                    disabled={!props.bookItem.isOnLoan}
-                    onClick={() => handleClickLendingSwitch(props.bookItem.id)}
+                    disabled={!bookItem.isOnLoan}
+                    onClick={() => handleClickLendingSwitch(bookItem.id)}
                 >
                     返却
                 </Button>

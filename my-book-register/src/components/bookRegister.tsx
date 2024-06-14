@@ -8,7 +8,7 @@ interface Props {
     setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
 }
 
-const BookRegister = (props: Props) => {
+const BookRegister = ({ setBooks }: Props) => {
     const [isbn, setIsbn] = useState('');
 
     const handleClickButton = (): void => {
@@ -19,7 +19,7 @@ const BookRegister = (props: Props) => {
                 alert('登録されていない ISBN コードです。');
                 return;
             }
-            props.setBooks(prev => [...prev, {
+            setBooks(prev => [...prev, {
                 id: prev.length.toString(),
                 name: data.items[0].volumeInfo.title,
                 isOnLoan: false,

@@ -8,7 +8,7 @@ interface Props {
     setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
 }
 
-const FilterableBookTable = (props: Props) => {
+const FilterableBookTable = ({ books, setBooks }: Props) => {
     const [filterText, setFilterText] = useState("");
 
     const handleChangeFilterText = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,10 +23,10 @@ const FilterableBookTable = (props: Props) => {
                 onChange={handleChangeFilterText}
             />
             <BookTable
-                bookItems={props.books.filter(x =>
+                bookItems={books.filter(x =>
                     !filterText || x.name.includes(filterText)
                 )}
-                setBooks={props.setBooks}
+                setBooks={setBooks}
             />
         </div>
     );

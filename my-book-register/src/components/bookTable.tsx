@@ -9,7 +9,7 @@ interface Props {
     setBooks: Dispatch<SetStateAction<BookItemModel[]>>;
 }
 
-const BookTable = (props: Props) => {
+const BookTable = ({ bookItems, setBooks }: Props) => {
     return (
         <table border={1}>
             <thead>
@@ -19,8 +19,8 @@ const BookTable = (props: Props) => {
                     <td>操作</td>
                 </tr>
             </thead>
-            {props.bookItems.map(book => (
-                <BookRow bookItem={book} setBooks={props.setBooks} key={book.id} />
+            {bookItems.map(book => (
+                <BookRow bookItem={book} setBooks={setBooks} key={book.id} />
             ))}
         </table>
     );
