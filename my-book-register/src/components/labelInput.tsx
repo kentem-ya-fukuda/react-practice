@@ -1,10 +1,11 @@
+import { ChangeEvent } from "react";
 import Input from "./input";
 import Label from "./label";
 
 interface Props {
     text: string;
     value?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LabelInput = ({ text, onChange, value}: Props) => {
