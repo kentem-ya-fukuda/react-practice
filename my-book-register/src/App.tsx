@@ -1,25 +1,44 @@
-import { useState } from 'react'
+import { useState } from 'react';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
-import { BookItemModel } from './models';
+import './App.css';
 import BookRegister from './components/bookRegister';
 import FilterableBookTable from './components/filterableBookTable';
+import { BookItemModel } from './models';
 
 function App() {
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
-  const handleClickAfterRegist = (): void => {
-    alert("書籍リスト再取得");
-  }
-
   return (
-    <div className='App'>
-      <BookRegister onClickAfterRegist={handleClickAfterRegist} setBooks={setBooks} />
+    <div className="App">
+      <BookRegister
+        onPostCompleted={(postedItem) => {
+          setBooks((prev) => [
+            ...prev,
+            {
+              id: prev.length.toString(),
+              ...postedItem,
+            },
+          ]);
+        }}
+      />
       <hr />
-      <FilterableBookTable books={books} setBooks={setBooks} />
+      <FilterableBookTable
+        books={books}
+        onClickDelete={(id) =>
+          setBooks((prev) => [...prev.filter((b) => b.id !== id)])
+        }
+        onClickLendingSwitch={(id) =>
+          setBooks((prev) =>
+            prev.map((x) => {
+              const isOnLoan = x.id === id ? !x.isOnLoan : x.isOnLoan;
+              return { ...x, isOnLoan: isOnLoan };
+            }),
+          )
+        }
+      />
     </div>
   );
 }
 
-export default App
+export default App;
