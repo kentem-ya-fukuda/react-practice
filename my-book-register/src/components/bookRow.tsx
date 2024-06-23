@@ -1,5 +1,4 @@
 import { BookItemModel } from '../models';
-import Button from './button';
 
 interface Props {
   bookItem: BookItemModel;
@@ -11,21 +10,17 @@ const BookRow = ({ bookItem, onClickDelete, onClickLendingSwitch }: Props) => {
   return (
     <tr>
       <td>{bookItem.name}</td>
-      <td>{bookItem.isOnLoan ? '貸出中' : '利用可能'}</td>
+      <td>{'貸出中 or 利用可能'}</td>
       <td>
-        <Button onClick={() => onClickDelete(bookItem.id)}>削除</Button>
-        <Button
-          disabled={bookItem.isOnLoan}
-          onClick={() => onClickLendingSwitch(bookItem.id)}
-        >
+        <button className="button" onClick={() => onClickDelete(bookItem.id)}>
+          削除
+        </button>
+        <button className="button" onClick={() => onClickLendingSwitch(bookItem.id)} disabled={bookItem.isOnLoan}>
           貸出
-        </Button>
-        <Button
-          disabled={!bookItem.isOnLoan}
-          onClick={() => onClickLendingSwitch(bookItem.id)}
-        >
+        </button>
+        <button className="button" onClick={() => onClickLendingSwitch(bookItem.id)} disabled={!bookItem.isOnLoan}>
           返却
-        </Button>
+        </button>
       </td>
     </tr>
   );
